@@ -1,35 +1,42 @@
 <?php
-try {
-    $dbPath = "/tmp/database_v3.db";
+$dbPath = "/tmp/database_v5.db";   // เปลี่ยนชื่อเพื่อ reset รอบสุดท้าย
 
-    $conn = new PDO("sqlite:" . $dbPath);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$conn = new PDO("sqlite:" . $dbPath);
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // สร้าง table rooms
-    $conn->exec("
-        CREATE TABLE IF NOT EXISTS rooms (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            room_number TEXT NOT NULL,
-            building TEXT NOT NULL,
-            status TEXT DEFAULT 'available'
-        )
-    ");
-
-    // 🔥 สร้าง table users
-   $conn->exec("
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        firstname TEXT NOT NULL,
-        lastname TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        username TEXT UNIQUE NOT NULL,
-        phone TEXT NOT NULL,
-        password TEXT NOT NULL,
-        role TEXT DEFAULT 'user',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
+// ===== users =====
+$conn->exec("
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    phone TEXT,
+    password TEXT NOT NULL,
+    role TEXT DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)
 ");
-} catch (PDOException $e) {
-    die("Database Error: " . $e->getMessage());
-}
+
+// ===== rooms =====
+$conn->exec("
+CREATE TABLE IF NOT EXISTS rooms (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    room_number TEXT,
+    type TEXT,
+    status TEXT DEFAULT 'available'
+)
+");
+
+// ===== bookings =====
+$conn->exec("
+CREATE TABLE IF NOT EXISTS bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    room_id INTEGER,
+    status TEXT DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)
+");
 ?>
