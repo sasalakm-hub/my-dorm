@@ -1,3 +1,5 @@
+require_once "db.php";
+
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="th">

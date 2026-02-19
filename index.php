@@ -1,3 +1,5 @@
+require_once "db.php";
+
 <?php 
 session_start(); 
 require_once 'connect.php'; // 1. เรียกใช้ไฟล์เชื่อมต่อ Database
