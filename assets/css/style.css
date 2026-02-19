@@ -1,0 +1,209 @@
+@charset "UTF-8";
+
+/* =========================================
+   1. GLOBAL STYLES (ใช้ร่วมกันทุกหน้า)
+   ========================================= */
+body {
+    font-family: 'Prompt', sans-serif;
+    margin: 0;
+    /* ลบ display: flex และ height: 100vh ออก เพื่อให้หน้าเว็บเลื่อนลงได้ตามปกติ */
+}
+
+/* =========================================
+   2. SPECIFIC STYLES FOR LOGIN PAGE ONLY
+   (เฉพาะหน้า Login/Register)
+   ========================================= */
+.body-login {
+    /* ย้ายคำสั่งจัดหน้า Login มาไว้ใน Class นี้แทน */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=2069&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    position: relative;
+}
+
+/* ไอคอนลูกตา (Eye Icon) */
+.password-wrapper {
+    position: relative;
+}
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6c757d;
+    z-index: 10;
+    font-size: 1.2rem;
+}
+.password-toggle:hover {
+    color: #0d6efd;
+}
+.form-floating input[type="password"], 
+.form-floating input[type="text"].password-reveal {
+    padding-right: 45px; 
+}
+
+/* =========================================
+   3. STYLES FOR INDEX PAGE (หน้าแรก)
+   ========================================= */
+
+/* Hero Banner Section */
+/* เลือกรูปภาพที่คุณชอบมาใส่แทน URL นี้ */
+.hero-banner {
+    /* 1. เปลี่ยน URL รูปภาพเป็นรูปห้องสวยๆ หรือบรรยากาศดีๆ */
+    /* linear-gradient: ใส่สีดำจางๆ ทับรูป (0.4) เพื่อให้ตัวหนังสือสีขาวเด่นขึ้น */
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');
+    
+    /* 2. คำสั่งสำคัญ! ทำให้รูปนิ่งเวลาเลื่อนเม้าส์ (Parallax) */
+    background-attachment: fixed; 
+    
+    background-size: cover;
+    background-position: center;
+    height: 70vh; /* ปรับความสูงให้เต็มตาขึ้นอีกนิด (70% ของจอ) */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    
+    /* เพิ่มขอบมนด้านล่างนิดๆ ให้ดูนุ่มนวล (Optional) */
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.hero-banner h1 {
+    font-weight: 700;
+    letter-spacing: 1px; /* เพิ่มระยะห่างตัวอักษรนิดนึง ดูโมเดิร์น */
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3); /* เงาตัวหนังสือฟุ้งๆ */
+}
+
+/* Feature Icons */
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+.feature-icon {
+    font-size: 2.5rem;
+    color: #0d6efd;
+    margin-bottom: 15px;
+}
+
+/* Room Cards */
+.room-card {
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+.room-card img {
+    height: 220px;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+.room-card:hover img {
+    transform: scale(1.05);
+}
+.price-tag {
+    color: #198754;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+/* --- Navbar Styles --- */
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #555 !important; /* สีเทาเข้ม อ่านง่าย */
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #0d6efd !important; /* สีน้ำเงินหลักเมื่อชี้ */
+}
+
+/* เอฟเฟกต์ขีดเส้นใต้เวลาเอาเมาส์ชี้ (Optional) */
+.nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #0d6efd;
+    transition: width 0.3s;
+    margin-top: 2px;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* --- Page Header (สำหรับหน้าย่อยที่ไม่ใช่หน้าแรก) --- */
+.page-header {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=2069&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    height: 250px; /* เตี้ยกว่าหน้าแรก */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+/* --- Search & Filter Bar --- */
+.filter-bar {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-top: -50px; /* ดึงขึ้นไปทับ Header นิดนึง ให้ดูมีมิติ */
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Room Amenities List (รายการสิ่งอำนวยความสะดวกในการ์ด) --- */
+.room-amenities {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: flex;
+    gap: 15px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+.room-amenities li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
