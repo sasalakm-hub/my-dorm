@@ -4,16 +4,21 @@ require_once 'connect.php'; // 1. เรียกใช้ไฟล์เชื�
 
 // 2. ฟังก์ชันช่วยนับห้องว่าง (เขียนไว้ตรงนี้จะได้เรียกใช้ง่ายๆ)
 function countAvailableRooms($conn, $building_prefix) {
-    // นับห้องที่ขึ้นต้นด้วยตัวอักษรนั้นๆ (A, B, C) และสถานะต้องเป็น 'available'
-    $sql = "SELECT COUNT(*) as count FROM rooms WHERE room_number LIKE '$building_prefix%' AND status = 'available'";
-    $result = $conn->query($sql);
-    
-    // ถ้า Query ผิดพลาด ให้คืนค่า 0
-    if(!$result) return 0;
-    
-    $row = $result->fetch_assoc();
-    return $row['count'];
+    $sql = "SELECT COUNT(*) as count 
+            FROM rooms 
+            WHERE room_number LIKE :prefix 
+            AND status = 'available'";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        ':prefix' => $building_prefix . '%'
+    ]);
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row ? $row['count'] : 0;
 }
+
 
 // 3. ดึงจำนวนห้องว่างมาเก็บใส่ตัวแปร
 $count_A = countAvailableRooms($conn, 'A');
