@@ -1,6 +1,6 @@
 <?php
 try {
-    $dbPath = "/tmp/database_v2.db";
+    $dbPath = "/tmp/database_v3.db";
 
     $conn = new PDO("sqlite:" . $dbPath);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,7 +16,7 @@ try {
     ");
 
     // 🔥 สร้าง table users
-    $conn->exec("
+   $conn->exec("
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         firstname TEXT NOT NULL,
@@ -25,11 +25,10 @@ try {
         username TEXT UNIQUE NOT NULL,
         phone TEXT NOT NULL,
         password TEXT NOT NULL,
+        role TEXT DEFAULT 'user',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
 ");
-
-
 } catch (PDOException $e) {
     die("Database Error: " . $e->getMessage());
 }
