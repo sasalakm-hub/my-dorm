@@ -21,7 +21,9 @@ CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   firstname TEXT NOT NULL,
   lastname TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
   username TEXT NOT NULL UNIQUE,
+  phone TEXT,
   password TEXT NOT NULL,
   role TEXT DEFAULT 'user'
 );
